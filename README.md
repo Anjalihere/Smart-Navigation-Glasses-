@@ -1,4 +1,4 @@
-# Innorave Smart (Starter)
+# Smart Navigation Glasses (Software)
 
 This is a starter scaffold for your Azure multimodal project:
 
