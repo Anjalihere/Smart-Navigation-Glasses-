@@ -72,3 +72,7 @@ azd init -t openai-chat-vision-quickstart
 azd auth login
 azd up
 ```
+
+## Demo Video
+
+[![Watch the video](https://img.youtube.com/vi/3keTI96f-Wo/0.jpg)](https://www.youtube.com/watch?v=3keTI96f-Wo)
