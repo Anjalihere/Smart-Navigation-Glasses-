@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#0a0e17" />
+    <title>Innorave — Voice Assistant</title>
+    <link rel="stylesheet" href="/styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to main content</a>
+
+    <div class="app-bg" aria-hidden="true"></div>
+
+    <header class="app-header">
+      <div class="brand">
+        <span class="brand-mark" aria-hidden="true"></span>
+        <div>
+          <h1 id="app-title">Innorave</h1>
+          <p class="brand-tagline" id="app-desc">Voice-first assistive AI</p>
+        </div>
+      </div>
+    </header>
+
+    <main id="main" class="app-main" tabindex="-1">
+      <div id="sr-announce" class="sr-only" role="status" aria-live="polite" aria-atomic="true"></div>
+
+      <section class="panel panel--chat" aria-labelledby="chat-heading">
+        <h2 id="chat-heading" class="sr-only">Conversation</h2>
+        <div class="chat-feed" role="log" aria-relevant="additions text" aria-live="polite">
+          <article class="chat-msg chat-msg--user">
+            <span class="chat-msg__label">You</span>
+            <p class="chat-msg__body" id="transcriptText">—</p>
+          </article>
+          <article class="chat-msg chat-msg--assistant">
+            <span class="chat-msg__label">Assistant</span>
+            <div
+              id="output"
+              class="answer-box"
+              role="region"
+              aria-labelledby="answer-label"
+              tabindex="0"
+            ></div>
+            <span id="answer-label" class="sr-only">Assistant reply</span>
+          </article>
+        </div>
+      </section>
+
+      <section class="panel panel--hero" aria-labelledby="voice-heading">
+        <h2 id="voice-heading" class="sr-only">Voice control</h2>
+
+        <div id="micShell" class="mic-shell">
+          <button
+            type="button"
+            id="micBtn"
+            class="mic-btn"
+            aria-pressed="false"
+            aria-describedby="mic-hint"
+            aria-label="Start listening; tap again when finished speaking"
+          >
+            <span class="mic-btn__ring" aria-hidden="true"></span>
+            <span class="mic-btn__inner">
+              <svg class="mic-btn__icon" width="40" height="40" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path
+                  d="M12 14a3 3 0 0 0 3-3V5a3 3 0 0 0-6 0v6a3 3 0 0 0 3 3zm5-3a5 5 0 1 1-10 0H5a7 7 0 0 0 6 6.92V21h2v-3.08A7 7 0 0 0 19 11h-2z"
+                  fill="currentColor"
+                />
+              </svg>
+            </span>
+          </button>
+
+          <div class="voice-wave" id="voiceWave" aria-hidden="true">
+            <span></span><span></span><span></span><span></span><span></span>
+          </div>
+
+          <p id="micLabel" class="mic-label">Tap to speak</p>
+          <p id="wakeStatus" class="wake-pill" role="status" aria-live="polite"></p>
+        </div>
+
+        <p id="listenBanner" class="listen-banner" role="status" aria-live="assertive" hidden>Listening — speak now</p>
+        <p id="listeningStatus" class="listen-hint"></p>
+
+        <input type="checkbox" id="wakeGlass" class="wake-input" />
+        <label for="wakeGlass" class="wake-toggle">
+          <span class="wake-toggle__track" aria-hidden="true"><span class="wake-toggle__knob"></span></span>
+          <span class="wake-toggle__text">“OK Glass” wake phrase</span>
+        </label>
+
+        <p id="mic-hint" class="mic-hint">
+          Use <strong>Chrome or Edge</strong> online for speech. Say <strong>“OK Glass”</strong> when wake is on, then
+          speak your request — or tap the mic to talk. Pick a language below for recognition, spoken replies, and (with
+          Azure Translator configured on the server) translated assistant answers and OCR text.
+        </p>
+
+        <label class="tool-inline">
+          <input type="checkbox" id="beepOnListen" checked />
+          <span>Beep when listening starts</span>
+        </label>
+      </section>
+
+      <aside class="suggestions" aria-label="Quick actions">
+        <p class="suggestions__title">Try asking</p>
+        <div class="chip-row" role="group" aria-label="Suggested questions">
+          <button type="button" class="chip" id="chipOpenCamera">Open the camera</button>
+          <button type="button" class="chip" id="chipAskAnything">Ask any question</button>
+          <button type="button" class="chip" id="chipReadImage">Read text from image</button>
+          <button type="button" class="chip" id="chipDanger">Detect any danger</button>
+          <div class="chip chip--lang" id="chipLangWrap">
+            <label for="voiceLang" class="chip__label">Change language</label>
+            <select id="voiceLang" class="chip-select" aria-label="Speech, text-to-speech, and translation target language">
+              <option value="en-US">English (US)</option>
+              <option value="hi-IN">Hindi</option>
+              <option value="te-IN">Telugu</option>
+              <option value="ta-IN">Tamil</option>
+              <option value="kn-IN">Kannada</option>
+              <option value="mr-IN">Marathi</option>
+              <option value="bn-IN">Bengali (India)</option>
+              <option value="gu-IN">Gujarati</option>
+            </select>
+          </div>
+          <button type="button" class="chip" id="chipRecognizePerson">Recognize the person I’m seeing</button>
+        </div>
+      </aside>
+
+      <section class="panel panel--camera" aria-labelledby="camera-heading">
+        <h2 id="camera-heading" class="panel__title">Camera</h2>
+        <p class="panel__sub" id="cam-hint">Point at objects or text. Voice commands like “open camera” still work.</p>
+        <div class="video-wrap">
+          <video id="camera" autoplay playsinline muted aria-label="Camera preview"></video>
+        </div>
+
+        <div
+          id="safetyStrip"
+          class="safety-strip safety-strip--safe"
+          role="status"
+          aria-live="polite"
+          aria-atomic="true"
+        >
+          <div class="safety-strip__row">
+            <span class="safety-strip__title">Spatial safety</span>
+            <span id="safetyStateText" class="safety-strip__badge">Off</span>
+          </div>
+          <p id="safetyGuidanceText" class="safety-strip__guide"></p>
+        </div>
+        <div
+          id="safetyEmergencyAnnouncer"
+          class="sr-only"
+          role="alert"
+          aria-live="assertive"
+          aria-atomic="true"
+        ></div>
+
+        <div class="spatial-controls">
+          <label class="tool-inline spatial-toggle">
+            <input type="checkbox" id="spatialSafetyOn" />
+            <span>Live obstacle detection</span>
+          </label>
+          <label class="tool-inline">
+            <input type="checkbox" id="spatialAudioOn" checked />
+            <span>Alarm &amp; voice guidance</span>
+          </label>
+        </div>
+        <p class="spatial-disclaimer" id="spatialDisclaimer">
+          Camera-only estimate — not a replacement for a white cane or professional mobility training. Network
+          required for analysis.
+        </p>
+
+        <canvas id="snapshot" class="hidden" aria-hidden="true"></canvas>
+        <div class="btn-grid btn-grid--camera" role="group" aria-label="Camera actions">
+          <button type="button" id="openCamBtn" class="btn btn-primary">Open camera</button>
+          <button type="button" id="askVision" class="btn btn-primary">Describe what you see</button>
+          <button type="button" id="readText" class="btn btn-primary">Read text (OCR)</button>
+          <button type="button" id="faceInspect" class="btn btn-primary">Recognize face &amp; emotion</button>
+        </div>
+      </section>
+
+      <section class="panel" aria-labelledby="people-heading">
+        <h2 id="people-heading" class="panel__title">Recognized people</h2>
+        <p class="panel__sub">Faces seen recently by the camera.</p>
+        <div class="people-table-wrap">
+          <table class="people-table" aria-label="Recognized people database">
+            <thead>
+              <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Label</th>
+                <th scope="col">Last seen</th>
+                <th scope="col">Times seen</th>
+                <th scope="col">Status</th>
+              </tr>
+            </thead>
+            <tbody id="peopleTableBody"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="panel" aria-labelledby="question-heading">
+        <h2 id="question-heading" class="panel__title">Question</h2>
+        <label class="sr-only" for="question">Type or edit your question</label>
+        <textarea
+          id="question"
+          rows="3"
+          placeholder="Your words appear here — edit before sending if you like."
+          aria-describedby="app-desc"
+        ></textarea>
+        <div class="btn-grid">
+          <button type="button" id="askChat" class="btn btn-primary btn-full">Send as text only</button>
+        </div>
+      </section>
+
+      <section class="panel panel--tools" aria-labelledby="tools-heading">
+        <h2 id="tools-heading" class="sr-only">Answer options</h2>
+        <div class="answer-tools">
+          <label class="tool-inline">
+            <input type="checkbox" id="readAloud" checked />
+            <span>Read answers aloud</span>
+          </label>
+          <button type="button" id="repeatAnswer" class="btn btn-ghost">Repeat last answer</button>
+        </div>
+      </section>
+    </main>
+
+    <script src="/app.js"></script>
+  </body>
+</html>
