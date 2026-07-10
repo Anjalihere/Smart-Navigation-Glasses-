@@ -99,7 +99,7 @@ Local demo benchmark from the async pipeline simulator:
 - Failure/fallback rate with `failure_rate=0`: `0%`
 
 ## Tech stack
-Python, FastAPI, asyncio, Azure Cognitive Services (Vision, Document Intelligence/OCR, Face, Speech, Translator, OpenAI)
+Python, FastAPI, asyncio, Azure Cognitive Services (Vision, Document Intelligence/OCR, Speech, Translator, OpenAI)
 
 ## Setup
 ```bash
