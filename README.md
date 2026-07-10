@@ -1,5 +1,5 @@
 # Smart Navigation Glasses
-> 🏆 Top 54 of 2000+ teams — Microsoft AI Unlocked Hackathon 2026 (India),
+> 🏆 Top 54 of 2000+ teams — Microsoft AI Unlocked Hackathon 2026 (Track: AI for India),
 > with mentorship from Microsoft engineers
 
 A real-time assistive navigation system that turns a camera feed into spoken
