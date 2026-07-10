@@ -9,7 +9,8 @@ pipeline designed to keep functioning when individual cloud calls fail.
 
 ## Demo video
 [![Watch the video](<img width="1021" height="680" alt="Screenshot 2026-05-15 at 12 18 18 AM" src="https://github.com/user-attachments/assets/392e57ea-39e4-4307-9270-741edbab92c1" />
-)](https://www.youtube.com/watch?v=3keTI96f-Wo)
+)](https://www.youtube.com/watch?v=3keTI96f-Wo) 
+Start from [2:58] to see the features of web-app
 
 ## Status
 | Component | Status |
