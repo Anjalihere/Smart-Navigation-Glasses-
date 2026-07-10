@@ -86,9 +86,7 @@ output into that language via Azure Translator (source language auto-detected
 by Translator, not by STT).
 
 See [`async_pipeline.py`](./async_pipeline.py) for the pipeline reference
-implementation (queue, retry/backoff, cache, fallback, latency tracking),
-and [`IMPLEMENTATION_PLAN.md`](./IMPLEMENTATION_PLAN.md) for how the backend
-exposes the demo pipeline endpoint.
+implementation (queue, retry/backoff, cache, fallback, latency tracking).
 
 The pipeline is exercised through [`/api/pipeline/demo`](./app/backend/main.py),
 while the main cloud routes (`/vision`, `/ocr`, `/spatial-safety`, `/chat`)
