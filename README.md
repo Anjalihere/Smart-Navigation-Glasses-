@@ -1,4 +1,7 @@
 # Smart Navigation Glasses
+> 🏆 Top 54 of 2000+ teams — Microsoft AI Unlocked Hackathon 2026 (India),
+> with mentorship from Microsoft engineers
+
 A real-time assistive navigation system that turns a camera feed into spoken
 guidance for visually impaired users. Frames are processed concurrently
 through Azure Cognitive Services (OpenAI, Vision, OCR, Translator, Speech) behind a fault-tolerant async
